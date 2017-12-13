@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -o errexit
+
+# aws lambda create-function \
+#   --region cn-north-1 \
+#   --function-name ImageResize \
+#   --zip-file ../dist/function.zip \
+#   --role lambda_resize_s3_execution \
+#   --environment Variables={BUCKET=resize-test,URL=http://resize-test.s3-website.cn-north-1.amazonaws.com.cn/} \
+#   --handler index.handler \
+#   --runtime nodejs6.10 \
+#   --version  1.0 \
+#   --profile default
+
+aws lambda update-function-configuration \
+  --function-name resize \
+  --region cn-north-1 \
+  --environment Variables={BUCKET='resize-test'}
